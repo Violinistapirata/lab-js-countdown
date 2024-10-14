@@ -16,9 +16,33 @@ startButton.addEventListener('click', () => startCountdown())
 // ITERATION 2: Start Countdown
 function startCountdown() {
   console.log("startCountdown called!");
-
-
+  
   // Your code goes here ...
+  
+  // Create a variable for the counter div
+  const divRemainingTime = document.querySelector('#time');
+
+  // Reset the counter
+  remainingTime = DURATION;
+  divRemainingTime.innerHTML = remainingTime;
+
+  // Disable the start button
+  startButton.disabled = true;
+
+  // Timer interval function
+  timer = setInterval(() => {
+
+    // Update counter
+    remainingTime--;
+    divRemainingTime.innerHTML = remainingTime;
+
+    // Stop condition
+    if (remainingTime <= 0) {
+      clearInterval(timer);
+      showToast('Take off!');
+      startButton.disabled = false;
+    };
+  }, 1000);
 }
 
 
