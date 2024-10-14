@@ -26,6 +26,10 @@ function startCountdown() {
   remainingTime = DURATION;
   divRemainingTime.innerHTML = remainingTime;
 
+  // Set the toast message
+  let popUpMessage = "⏰ Final countdown! ⏰"
+  showToast(popUpMessage);
+  
   // Disable the start button
   startButton.disabled = true;
 
@@ -33,15 +37,25 @@ function startCountdown() {
   timer = setInterval(() => {
 
     // Update counter
-    remainingTime--;
+    if (remainingTime > 0) remainingTime--;
     divRemainingTime.innerHTML = remainingTime;
-
-    // Stop condition
-    if (remainingTime <= 0) {
-      clearInterval(timer);
-      showToast();
-      startButton.disabled = false;
-    };
+    
+    switch (remainingTime) {
+      case 5:
+        popUpMessage = "Start the engines! 💥"
+        showToast(popUpMessage);
+        break;
+          
+      case 0:
+        popUpMessage = "Lift off! 🚀"
+        clearInterval(timer);           // Stops the timer
+        showToast(popUpMessage);
+        startButton.disabled = false;   // Enables the start button
+        break;
+            
+      default:
+        break;
+    }
   }, 1000);
 }
 
@@ -51,10 +65,13 @@ function startCountdown() {
 // ITERATION 3: Show Toast
 function showToast(message) {
   console.log("showToast called!");
-
+  
   // Your code goes here ...
   const divToast = document.querySelector('#toast');
+  const toastMessage = document.querySelector('#toast-message');
+  toastMessage.innerHTML = message;
   divToast.classList.add('show');
+  
 
   const toastTimeout = setTimeout(() => {
     divToast.classList.remove('show');    
