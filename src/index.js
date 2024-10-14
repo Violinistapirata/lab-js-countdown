@@ -54,12 +54,19 @@ function showToast(message) {
 
   // Your code goes here ...
   const divToast = document.querySelector('#toast');
-  divToast.classList.toggle('show');
+  divToast.classList.add('show');
 
-  setTimeout(() => divToast.classList.toggle('show'), 3000);
-
+  const toastTimeout = setTimeout(() => {
+    divToast.classList.remove('show');    
+  }, 3000);
+  
   // BONUS: ITERATION 4: TOAST CLOSE BUTTON
-
+  
   // Your code goes here ...
-
+  const closeButton = document.querySelector('#close-toast');
+  closeButton.addEventListener('click', () => {
+    clearTimeout(toastTimeout);
+    divToast.classList.remove('show');
+  })
 }
+
