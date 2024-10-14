@@ -39,7 +39,7 @@ function startCountdown() {
     // Stop condition
     if (remainingTime <= 0) {
       clearInterval(timer);
-      showToast('Take off!');
+      showToast();
       startButton.disabled = false;
     };
   }, 1000);
@@ -53,9 +53,10 @@ function showToast(message) {
   console.log("showToast called!");
 
   // Your code goes here ...
+  const divToast = document.querySelector('#toast');
+  divToast.classList.toggle('show');
 
-
-
+  setTimeout(() => divToast.classList.toggle('show'), 3000);
 
   // BONUS: ITERATION 4: TOAST CLOSE BUTTON
 
